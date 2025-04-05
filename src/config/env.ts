@@ -5,6 +5,7 @@ const result = dotenv.config();
 if (result.error) {
     Logger.error(`Error in resolving environment variables: ${result.error}`)
 }
+console.log(result);
 
 export const Config = {
     PORT: process.env.PORT,

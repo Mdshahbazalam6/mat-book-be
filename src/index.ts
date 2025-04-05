@@ -1,8 +1,9 @@
 import { Logger } from "./common/logger";
 
 import { connectToDb } from './config/mongoose';
-import { Config } from "./config/env";
 import app from "./config/express";
+import dotenv from "dotenv";
+dotenv.config();
 
 const dbConnection = connectToDb();
 
@@ -26,9 +27,8 @@ if (dbConnection) {
 }
 
 
-
-app.listen(Config.PORT, () => {
-    console.log('Server is running on port ' + Config.PORT);
+app.listen(process.env.PORT, () => {
+    console.log('Server is running on port ' + process.env.PORT);
 });
 
 

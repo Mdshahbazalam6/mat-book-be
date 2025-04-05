@@ -56,14 +56,14 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.getJWT = async function () {
     const user = this;
 
-    if (!Config.JWT_SECRET || !Config.TOKEN_EXPIRY_TIME) {
+    if (!process.env.JWT_SECRET || !process.env.TOKEN_EXPIRY_TIME) {
         throw new Error("JWT_SECRET or TOKEN_EXPIRY_TIME is not defined in the configuration.");
     }
 
     //@ts-ignore
     return jwt.sign(
         { _id: user._id.toString(), email: user.email, firstName: user.firstName, lastName: user.lastName },
-        Config.JWT_SECRET,
+        process.env.JWT_SECRET,
         { expiresIn: Config.TOKEN_EXPIRY_TIME ?? '1d' }
     );
 };

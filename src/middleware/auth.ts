@@ -15,7 +15,7 @@ export const Auth = (req: Request, res: Response, next: NextFunction): any => {
             return res.status(404).json(responseFormatter({ data: null, success: false, error_code: 400, message: "Token not provided" }));
         }
 
-        const decoded = JWT.verify(token, Config.JWT_SECRET as string) as TokenPayload;
+        const decoded = JWT.verify(token, process.env.JWT_SECRET as string) as TokenPayload;
         if (!decoded) {
             return res.status(400).json(responseFormatter({ data: null, success: false, error_code: 400, message: "Invalid Token" }));
         }
