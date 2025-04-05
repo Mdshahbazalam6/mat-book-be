@@ -7,7 +7,7 @@ import { routes } from "../routes/v1/index";
 const app: Express = express();
 
 app.use(cors({
-    origin: "http://localhost:5173", // Allow frontend origin
+    origin: ["http://localhost:5173", "https://meta-book-fe.onrender.com"], // Allow frontend origin
     credentials: true, // If using cookies or authentication
     methods: ["GET", "POST", "PUT", "DELETE"], // Allow necessary methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow custom headers
