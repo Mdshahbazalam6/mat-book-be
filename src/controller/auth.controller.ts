@@ -42,6 +42,9 @@ export const signInUser = async (req: Request, res: Response): Promise<any> => {
         const token = await user.getJWT();
 
         res.cookie("chatToken", token, {
+            httpOnly: true, // (optional, but recommended for security)
+            sameSite: "none",
+            secure: true, // ✅ Required when using sameSite: "None"
             expires: new Date(Date.now() + 8 * 3600000),
         });
 
