@@ -15,6 +15,13 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
+app.set('trust proxy', true)
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://meta-book-fe.onrender.com");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Set-Cookie");
+    next();
+});
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Express + TypeScript Server");
@@ -27,5 +34,6 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
     Logger.error(`Unhandled error: ${err.message}`);
     res.status(500).json({ message: "Internal server error" });
 });
+
 
 export default app;
